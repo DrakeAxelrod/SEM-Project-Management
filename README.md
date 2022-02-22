@@ -1,2 +1,9 @@
 # SEM-Project-Management
-Testing this to see if it a good system
+
+## meetings
+> format - [start-date -> end-date](internal link)
+- [[2022-2-21] to [2022-2-25]]()
+
+
+
+## links
