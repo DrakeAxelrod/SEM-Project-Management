@@ -1,37 +1,15 @@
-from scripts.WhenIsGood import WhenIsGood
+import os
+from datetime import datetime, timedelta
 
-wig = WhenIsGood("[2022-03-22 to 2022-03-27]")
+class Plan:
+  def __init__(self):
+    now = datetime.now()
+    monday = str((now - timedelta(days=now.weekday())).date())
+    friday = str((now - timedelta(days=now.weekday() - 5)).date())
+    dir_name = "[" + monday + "_" + friday + "]"
+    script_dir = __file__.replace(os.path.basename(__file__), "")
+    self.dir = script_dir + dir_name
+    if not os.path.isdir(self.dir):
+      os.mkdir(self.dir)
 
-# drake
-drake = "Drake"
-wig.monday(drake, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
-wig.tuesday(drake, [17])
-wig.wednesday(drake, [8, 10])
-wig.thursday(drake, [14])
-wig.friday(drake, [])
-
-# anna
-anna = "Anna"
-wig.monday(anna, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
-wig.tuesday(anna, [17])
-wig.wednesday(anna, [8, 10])
-wig.thursday(anna, [14])
-wig.friday(anna, [])
-
-# gustav
-gustav = "Gustav"
-wig.monday(gustav, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
-wig.tuesday(gustav, [17])
-wig.wednesday(gustav, [8, 10])
-wig.thursday(gustav, [14])
-wig.friday(gustav, [])
-
-# vernita
-vernita = "Vernita"
-wig.monday(vernita, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
-wig.tuesday(vernita, [17])
-wig.wednesday(vernita, [8, 10])
-wig.thursday(vernita, [14])
-wig.friday(vernita, [])
-
-# wig.render()
+p = Plan()
