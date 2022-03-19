@@ -40,7 +40,8 @@ num_to_slot = {
 }
 
 class WhenIsGood(dict):
-  def __init__(self):
+  def __init__(self, timeframe: str):
+    self.timeframe = timeframe
     self[MONDAY] = deepcopy(member_time_slots)
     self[TUESDAY] = deepcopy(member_time_slots)
     self[WEDNESDAY] = deepcopy(member_time_slots)
@@ -100,7 +101,7 @@ class WhenIsGood(dict):
       for slot in self[day]:
         table[i] += f"{self[day][slot]}|"
         i += 1
-    string = "# Availability\n\n"
+    string = f"# Availability {self.timeframe}\n\n"
     for s in table:
       string += s + "\n"
     return Markdown(string)
