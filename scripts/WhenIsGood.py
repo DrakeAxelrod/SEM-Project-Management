@@ -41,12 +41,6 @@ num_to_slot = {
 
 class WhenIsGood(dict):
   def __init__(self):
-    self.display = (
-"""\
-|Time|Monday|Tuesday|Wednesday|Thursday|Friday|
-|-|-|-|-|-|-|
-"""
-    )
     self[MONDAY] = deepcopy(member_time_slots)
     self[TUESDAY] = deepcopy(member_time_slots)
     self[WEDNESDAY] = deepcopy(member_time_slots)
@@ -55,23 +49,38 @@ class WhenIsGood(dict):
 
   def monday(self, name: str, times: list):
     for slot in times:
-      self[MONDAY][num_to_slot[slot]] += " " + name + " "
+      if self[MONDAY][num_to_slot[slot]] == "":
+        self[MONDAY][num_to_slot[slot]] = name
+      else:
+        self[MONDAY][num_to_slot[slot]] += ", " + name
 
   def tuesday(self, name: str, times: list):
     for slot in times:
-      self[TUESDAY][num_to_slot[slot]] += " " + name + " "
+      if self[TUESDAY][num_to_slot[slot]] == "":
+        self[TUESDAY][num_to_slot[slot]] = name
+      else:
+        self[TUESDAY][num_to_slot[slot]] += ", " + name
 
   def wednesday(self, name: str, times: list):
     for slot in times:
-      self[WEDNESDAY][num_to_slot[slot]] += " " + name + " "
+      if self[WEDNESDAY][num_to_slot[slot]] == "":
+        self[WEDNESDAY][num_to_slot[slot]] = name
+      else:
+        self[WEDNESDAY][num_to_slot[slot]] += ", " + name
 
   def thursday(self, name: str, times: list):
     for slot in times:
-      self[THURSDAY][num_to_slot[slot]] += " " + name + " "
+      if self[THURSDAY][num_to_slot[slot]] == "":
+        self[THURSDAY][num_to_slot[slot]] = name
+      else:
+        self[THURSDAY][num_to_slot[slot]] += ", " + name
 
   def friday(self, name: str, times: list):
     for slot in times:
-      self[FRIDAY][num_to_slot[slot]] += " " + name + " "
+      if self[FRIDAY][num_to_slot[slot]] == "":
+        self[FRIDAY][num_to_slot[slot]] = name
+      else:
+        self[FRIDAY][num_to_slot[slot]] += ", " + name
 
 
   def render(self):
@@ -91,7 +100,7 @@ class WhenIsGood(dict):
       for slot in self[day]:
         table[i] += f"{self[day][slot]}|"
         i += 1
-    string = ""
+    string = "# Availability\n\n"
     for s in table:
       string += s + "\n"
     return Markdown(string)
